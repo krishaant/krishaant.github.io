@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Krishaant — Statistics & Economics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0a0a0b;
+    --bg-raised: #131315;
+    --card: #16161a;
+    --border: #2a2a2f;
+    --text: #f2f2f0;
+    --text-dim: #a3a3ab;
+    --text-faint: #6b6b74;
+    --accent: #4d7cff;
+    --accent-dim: #2a3d7a;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, .display{
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  a{ color: inherit; text-decoration: none; }
+
+  .wrap{ max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+  /* ---------- Nav ---------- */
+  nav{
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(10px);
+    background: rgba(10,10,11,0.75);
+    border-bottom: 1px solid var(--border);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height: 64px;
+  }
+  .nav-name{ font-family:'Space Grotesk', sans-serif; font-weight:600; font-size:16px; letter-spacing:0.02em; }
+  .nav-links{ display:flex; gap:28px; font-size:14px; color:var(--text-dim); }
+  .nav-links a:hover{ color: var(--text); }
+
+  /* ---------- Section label (kanji + title) ---------- */
+  .section-label{
+    display:flex; align-items:flex-start; gap:16px;
+    margin-bottom: 32px;
+  }
+  .section-label .kanji{
+    writing-mode: vertical-rl;
+    font-size: 13px;
+    color: var(--text-faint);
+    letter-spacing: 0.15em;
+    padding-top: 6px;
+  }
+  .section-label h2{
+    font-size: 28px;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 14px;
+  }
+  .section-label h2::after{
+    content:"";
+    position:absolute; left:0; bottom:0;
+    width: 44px; height: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+
+  section{ padding: 88px 0; }
+  section + section{ border-top: 1px solid var(--border); }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding: 120px 0 80px;
+  }
+  .hero .kanji-eyebrow{
+    writing-mode: vertical-rl;
+    display:inline-block;
+    font-size: 13px;
+    color: var(--text-faint);
+    letter-spacing: 0.2em;
+    margin-bottom: 20px;
+  }
+  .hero-grid{
+    display:flex; align-items:center; gap:48px;
+  }
+  .hero-copy{ flex: 1; min-width: 0; }
+  .hero h1{
+    font-size: 44px;
+    line-height: 1.15;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  .hero h1 .accent{ color: var(--accent); }
+  .hero p{
+    color: var(--text-dim);
+    font-size: 17px;
+    max-width: 46ch;
+  }
+  .avatar-wrap{
+    flex-shrink:0;
+    width: 168px; height: 168px;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: linear-gradient(155deg, var(--accent-dim), #1a1a1e 70%);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .avatar-wrap img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .avatar-wrap .initials{
+    font-family:'Space Grotesk', sans-serif;
+    font-size: 44px; font-weight:700; color: rgba(255,255,255,0.85);
+  }
+
+  /* ---------- Cards ---------- */
+  .card{
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+  }
+  .card + .card{ margin-top: 20px; }
+  .card h3{ font-size: 16px; font-weight: 600; margin-bottom: 16px; }
+  .card ul{ list-style:none; }
+  .card li{
+    position:relative;
+    padding-left: 18px;
+    color: var(--text-dim);
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+  .card li:last-child{ margin-bottom:0; }
+  .card li::before{
+    content:"";
+    position:absolute; left:0; top: 9px;
+    width:5px; height:5px; border-radius:50%;
+    background: var(--accent);
+  }
+  .card.placeholder{
+    border-style: dashed;
+    color: var(--text-faint);
+    font-size: 14px;
+  }
+  .card.placeholder p{ color: var(--text-faint); }
+
+  /* ---------- Timeline (experience) ---------- */
+  .timeline{ position:relative; }
+  .timeline-item{
+    position:relative;
+    display:flex; gap:20px;
+    padding-bottom: 40px;
+  }
+  .timeline-item:last-child{ padding-bottom:0; }
+  .timeline-item::before{
+    content:"";
+    position:absolute;
+    left: 27px; top: 56px; bottom: -4px;
+    width: 1px;
+    background: var(--border);
+  }
+  .timeline-item:last-child::before{ display:none; }
+  .logo-box{
+    flex-shrink:0;
+    width: 56px; height:56px;
+    border-radius: 14px;
+    background: #fff;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:18px; color:#111;
+  }
+  .timeline-body h3{ font-size:17px; font-weight:700; margin-bottom:2px; }
+  .timeline-body .role{ color: var(--accent); font-size:14px; font-weight:500; margin-bottom:6px; }
+  .timeline-body .sub{ color: var(--text-dim); font-size:14px; margin-bottom:12px; }
+  .tags{ display:flex; flex-wrap:wrap; gap:8px; }
+  .tag{
+    font-size:12px;
+    padding: 5px 12px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--text-dim);
+  }
+
+  /* ---------- Projects ---------- */
+  .projects-grid{ display:flex; flex-direction:column; gap:20px; }
+  .project-card h3{ font-size:16px; font-weight:700; margin-bottom:8px; }
+  .project-card p{ color: var(--text-dim); font-size:14px; margin-bottom:14px; }
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding: 56px 0 64px;
+    text-align:center;
+  }
+  .footer-links{
+    display:flex; justify-content:center; gap:28px;
+    margin-bottom:18px;
+  }
+  .footer-links a{
+    display:flex; align-items:center; gap:8px;
+    color: var(--text-dim); font-size:14px;
+  }
+  .footer-links a:hover{ color: var(--text); }
+  footer .meta{ color: var(--text-faint); font-size:13px; }
+
+  /* placeholder note chip, only for your editing reference */
+  .edit-note{
+    display:inline-block;
+    font-size: 11px;
+    color: var(--accent);
+    background: rgba(77,124,255,0.1);
+    border: 1px solid rgba(77,124,255,0.25);
+    padding: 3px 9px;
+    border-radius: 6px;
+    margin-bottom: 14px;
+  }
+
+  /* ---------- Writing ---------- */
+  .writing-intro{
+    color: var(--text-dim);
+    font-size: 15px;
+    margin-bottom: 28px;
+    max-width: 56ch;
+  }
+  .featured-piece{
+    margin-bottom: 20px;
+  }
+  .featured-piece .kicker{
+    display:inline-block;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(77,124,255,0.1);
+    border: 1px solid rgba(77,124,255,0.25);
+    padding: 3px 10px;
+    border-radius: 6px;
+    margin-bottom: 14px;
+  }
+  .featured-piece h3{ font-size: 18px; margin-bottom: 8px; }
+  .featured-piece p{ color: var(--text-dim); font-size: 14px; margin-bottom: 14px; }
+  .featured-piece .byline{ color: var(--text-faint); font-size: 13px; margin-bottom: 14px; }
+
+  .byline-card h3{ margin-bottom: 4px; }
+  .byline-card .byline-sub{ color: var(--text-faint); font-size: 13px; margin-bottom: 20px; }
+  .byline-list{
+    list-style:none;
+    columns: 2;
+    column-gap: 28px;
+  }
+  .byline-list li{
+    break-inside: avoid;
+    font-size: 14px;
+    color: var(--text-dim);
+    padding: 9px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .byline-list li:last-child{ border-bottom:none; }
+  .byline-list a:hover{ color: var(--text); }
+
+  /* ---------- Article card grid (FMT-style) ---------- */
+  .article-grid{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px 24px;
+  }
+  .article-card{ display:block; }
+  .article-thumb{
+    aspect-ratio: 16/10;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .article-thumb::after{
+    content:"FMT";
+    position:absolute; bottom:8px; right:10px;
+    font-family:'Space Grotesk', sans-serif;
+    font-size:11px; font-weight:700; letter-spacing:0.05em;
+    color: rgba(255,255,255,0.55);
+  }
+  .thumb-a{ background: linear-gradient(135deg, #1d2a5c, #4d7cff); }
+  .thumb-b{ background: linear-gradient(135deg, #1a4a3d, #2fbf8f); }
+  .thumb-c{ background: linear-gradient(135deg, #4a1d3d, #b4479a); }
+  .thumb-d{ background: linear-gradient(135deg, #4a3a12, #d9a53f); }
+  .article-thumb img{
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .article-date{
+    font-size: 12px;
+    color: var(--text-faint);
+    margin-top: 4px;
+  }
+
+  .article-category{
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #4ade80;
+    margin-bottom: 6px;
+  }
+  .article-headline{
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--text);
+  }
+  .article-card:hover .article-headline{ color: var(--accent); }
+
+  @media (max-width: 620px){
+    .article-grid{ grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 620px){
+    .byline-list{ columns: 1; }
+    .hero-grid{ flex-direction: column-reverse; align-items:flex-start; }
+    .hero h1{ font-size: 34px; }
+    .section-label h2{ font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-name">Krishaant</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#writing">Writing</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <h1>Hey, I'm<br><span class="accent">Krishaant.</span></h1>
+        <p>
+          I'm a Statistics and Economics student drawn to the space where numbers
+          meet human behavior — I like digging into data to understand not just
+          what's happening, but why people decide the things they decide.
+        </p>
+      </div>
+      <div class="avatar-wrap">
+        <img src="assets/krishaant.png" alt="Krishaant" style="object-position: 50% 12%;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about">
+  <div class="wrap">
+    <div class="section-label">
+      <h2>A bit about me</h2>
+    </div>
+
+    <div class="card">
+      <h3>Currently</h3>
+      <ul>
+        <li>Research Assistant <span style="color:var(--text-faint)">— add department / professor</span></li>
+        <li>Contract Worker, Pearson</li>
+        <li>Prev. Data Analyst <span style="color:var(--text-faint)">— add company name</span></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Chat to me about</h3>
+      <ul>
+        <li>Half Ironman training</li>
+        <li>Basketball</li>
+        <li>Why your regression probably needs a control group</li>
+        <li>Anything econometrics or causal inference</li>
+      </ul>
+    </div>
+
+    <div class="card placeholder">
+      <span class="edit-note">Fill in later</span>
+      <p>A little more about me — a few lines on what you're into professionally (e.g. what kind of data work excites you, what you're looking for next).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCE ============ -->
+<section id="experience">
+  <div class="wrap">
+    <div class="section-label">
+      <h2>What I've been up to</h2>
+    </div>
+
+    <div class="timeline">
+      <!--
+        Duplicate a .timeline-item block below for each role.
+        Swap the logo-box text/image, role title, subtitle, description, and tags.
+      -->
+      <div class="timeline-item">
+        <div class="logo-box">K</div>
+        <div class="timeline-body">
+          <span class="edit-note">Example — replace with your role</span>
+          <h3>Company Name</h3>
+          <div class="role">Job Title</div>
+          <div class="sub">One line on the team or what you did.</div>
+          <div class="tags">
+            <span class="tag">Skill</span>
+            <span class="tag">Skill</span>
+            <span class="tag">Skill</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section id="projects">
+  <div class="wrap">
+    <div class="section-label">
+      <h2>Some of my projects</h2>
+    </div>
+
+    <div class="projects-grid">
+      <div class="card project-card">
+        <span class="edit-note">Example — replace with your project</span>
+        <h3>Project Name</h3>
+        <p>One or two sentences on what it does and why you built it.</p>
+        <div class="tags">
+          <span class="tag">Tool</span>
+          <span class="tag">Tool</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WRITING ============ -->
+<section id="writing">
+  <div class="wrap">
+    <div class="section-label">
+      <h2>Writing</h2>
+    </div>
+    <p class="writing-intro">
+      Before statistics and economics, I worked as a journalist at
+      <strong>Free Malaysia Today (FMT)</strong>, covering Malaysian business and finance.
+    </p>
+
+    <div class="card featured-piece">
+      <span class="kicker">Literature Review</span>
+      <h3>Islamic Finance: Understanding the Larger Context</h3>
+      <div class="byline">By Krishaant Pathmanathan</div>
+      <p>
+        A review connecting two bodies of research that are rarely put side by side:
+        the sustainability struggles facing Islamic countries, and Islamic Finance's
+        potential as the solution. Covers where Islamic Finance and sustainable
+        finance overlap, where implementation still falls short, and what a
+        successful rollout &mdash; like the Sukuk bond &mdash; looks like in practice.
+      </p>
+      <div class="tags">
+        <span class="tag">Islamic Finance</span>
+        <span class="tag">Sustainability</span>
+        <span class="tag">ESG</span>
+      </div>
+    </div>
+
+    <div class="card byline-card">
+      <h3>Published articles</h3>
+      <div class="byline-sub">56 pieces on Malaysian business, markets, and national affairs for FMT</div>
+      <div class="article-grid">
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/bahasa/tempatan/2023/07/31/kemenangan-pn-mampu-jadi-penghalang-ekonomi-kata-pakar" target="_blank" rel="noopener">
+        <div class="article-thumb"><img src="https://media.freemalaysiatoday.com/wp-content/uploads/2023/03/b7e4c9a9-pn-ph-bernama-25323.jpg" alt="" loading="lazy"></div>
+        <div class="article-category">BAHASA</div>
+        <div class="article-headline">Kemenangan PN mampu jadi penghalang ekonomi, kata pakar</div>
+        <div class="article-date">Jul 31, 2023</div>
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/microsite/2023/07/31/pn-win-will-be-a-setback-for-economy-say-experts-2" target="_blank" rel="noopener">
+        <div class="article-thumb"><img src="https://media.freemalaysiatoday.com/wp-content/uploads/2023/03/b7e4c9a9-pn-ph-bernama-25323.jpg" alt="" loading="lazy"></div>
+        <div class="article-category">NEWS</div>
+        <div class="article-headline">PN win will be a setback for economy, say experts</div>
+        <div class="article-date">Jul 31, 2023</div>
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/07/31/pn-win-will-be-a-setback-for-economy-say-experts" target="_blank" rel="noopener">
+        <div class="article-thumb"><img src="https://media.freemalaysiatoday.com/wp-content/uploads/2023/03/b7e4c9a9-pn-ph-bernama-25323.jpg" alt="" loading="lazy"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">PN win will be a setback for economy, say experts</div>
+        <div class="article-date">Jul 31, 2023</div>
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/07/25/baby-food-market-sees-boom-despite-falling-birth-rate" target="_blank" rel="noopener">
+        <div class="article-thumb"><img src="https://media.freemalaysiatoday.com/wp-content/uploads/2023/07/4bc3177d-babies-feeding-freepik-240723.jpg" alt="" loading="lazy"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Baby food market sees boom despite falling birth rate</div>
+        <div class="article-date">Jul 24, 2023</div>
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/06/29/ringgit-impacted-by-exporters-not-repatriating-earnings-says-rafizi" target="_blank" rel="noopener">
+        <div class="article-thumb"><img src="https://media.freemalaysiatoday.com/wp-content/uploads/2023/05/2375e484-4_rafizi_ramli_fmt_moganraj_20052023.jpg" alt="" loading="lazy"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Ringgit impacted by exporters not repatriating earnings, says Rafizi</div>
+        <div class="article-date">Jun 28, 2023</div>
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/business/2023/06/27/govt-to-table-energy-conservation-bill-in-next-parliament-sitting" target="_blank" rel="noopener">
+        <div class="article-thumb"><img src="https://media.freemalaysiatoday.com/wp-content/uploads/2023/02/057ad162-nik-nazmi-nik-ahmad-fmt.jpg" alt="" loading="lazy"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Govt to table energy conservation bill in next Parliament sitting</div>
+        <div class="article-date">Jun 27, 2023</div>
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/business/2023/06/27/huge-market-awaits-business-that-embrace-esg" target="_blank" rel="noopener">
+        <div class="article-thumb"><img src="https://media.freemalaysiatoday.com/wp-content/uploads/2022/10/proton-x50-factory-paultan-pic.jpg" alt="" loading="lazy"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Huge market awaits businesses that adopt ESG practices</div>
+        <div class="article-date">Jun 27, 2023</div>
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/06/26/palm-oil-producers-see-red-despite-record-output" target="_blank" rel="noopener">
+        <div class="article-thumb"><img src="https://media.freemalaysiatoday.com/wp-content/uploads/2022/12/FMT-KELAPA-SAWIT-ESTATE-SALAK-SENDAYAN-170419-4.jpg" alt="" loading="lazy"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Palm oil producers see red despite record output</div>
+        <div class="article-date">Jun 25, 2023</div>
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/06/24/carsome-will-we-fail-to-grab-the-chance-again" target="_blank" rel="noopener">
+        <div class="article-thumb"><img src="https://media.freemalaysiatoday.com/wp-content/uploads/2023/06/6b8a2df8-carsome-2jpg.jpg" alt="" loading="lazy"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Carsome — will we fail to grab the chance again?</div>
+        <div class="article-date">Jun 24, 2023</div>
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/06/23/good-start-for-tech-ipos-but-uncertainty-remains" target="_blank" rel="noopener">
+        <div class="article-thumb"><img src="https://media.freemalaysiatoday.com/wp-content/uploads/2023/05/edaf813b-bursa-malaysia-stock-market-rhb-bank-4.jpg" alt="" loading="lazy"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Good start for tech IPOs, but uncertainty remains</div>
+        <div class="article-date">Jun 22, 2023</div>
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/04/18/mag-cuts-annual-net-loss-to-rm344mil/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-c"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">MAG cuts annual net loss to RM344mil</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/business/2023/04/13/no-recession-in-2023-says-serc/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-d"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">No recession in 2023, says SERC</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/04/13/lee-kim-yews-company-doing-fine-without-him/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-a"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Lee Kim Yew&#39;s company doing fine without him</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/04/13/a-renaissance-or-a-false-dawn-for-malaysian-glove-makers/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-b"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">A renaissance or a false dawn for Malaysian glove makers?</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/04/07/press-metal-gleams-after-rm780mil-aluminium-deal/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-c"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Press Metal gleams after RM780mil aluminium deal</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/04/06/malaysias-border-reopening-boosts-consumer-reit-and-construction-sectors/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-d"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Malaysia&#39;s border reopening boosts consumer, REIT, and construction sectors</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/business/2023/04/06/consumer-spending-to-remain-resilient-says-kenanga/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-a"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Consumer spending to remain resilient, says Kenanga</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/04/04/cypark-shares-spike-20-despite-downgrade/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-b"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Cypark shares spike 20% despite downgrade</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/business/2023/04/04/bright-prospects-for-ranhill-on-the-back-of-power-plant-contract-win/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-c"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Bright prospects for Ranhill on the back of power plant contract win</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/04/04/airport-project-thats-still-struggling-to-take-off/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-d"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Airport project that&#39;s still struggling to take off</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/03/31/glimmer-of-hope-for-sapura-energy-to-resolve-its-debt-crisis/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-a"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Glimmer of hope for Sapura Energy to resolve its debt crisis</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/business/2023/03/28/non-islamic-countries-buying-into-the-halal-concept/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-b"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Non-Islamic countries buying into the halal concept</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/03/25/reits-a-safe-haven-in-market-turmoil-says-midf/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-c"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">REITs a safe haven in market turmoil, says MIDF</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/business/2023/03/23/gamuda-records-10-rise-in-quarterly-profit-to-rm195mil/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-d"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Gamuda records 10% rise in quarterly profit to RM195mil</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/business/2023/03/23/computer-forms-plummets-66-after-acquiring-stake-in-bsl-corp/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-a"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Computer Forms plummets 66% after acquiring stake in BSL Corp</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/business/2023/03/21/ekuinas-launches-rm100mil-fund-for-mid-market-companies/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-b"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Ekuinas launches RM100mil fund for mid-market companies</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/03/20/white-knight-to-rescue-sapura-energy-from-financial-abyss/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-c"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">White knight to rescue Sapura Energy from financial abyss</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/03/17/no-more-turbulence-for-tony-fernandes-capital-a-airasia-x/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-d"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">No more turbulence for Tony Fernando&#39; Capital A, AirAsia X</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/03/17/experts-decry-lack-of-effort-to-fight-cybercrimes/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-a"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Experts decry lack of effort to fight cybercrimes</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/business/2023/03/15/oppstar-opens-with-225-premium-on-ace-market/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-b"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Oppstar opens with 225% premium on ACE Market</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/03/13/investors-flock-back-to-sapura-energy-stock-surges-33/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-c"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Investors flock back to Sapura Energy, stock surges 33%</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/03/10/astro-dismisses-privatisation-speculation-amid-stock-rally/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-d"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Astro dismisses privatisation speculation amid stock rally</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/03/09/sapura-energy-gets-a-breather-in-fight-to-overcome-debt-problem/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-a"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Sapura Energy gets a breather in fight to overcome debt problem</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/03/08/bursa-securities-queries-computer-forms-after-30-plunge-in-share-price/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-b"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Bursa Securities queries Computer Forms after 30% plunge in share price</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/business/2023/03/08/icon-upgraded-to-buy-in-light-of-new-ma-proposals/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-c"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Icon upgraded to &#39;buy&#39; in light of new M&amp;A proposals</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/business/2023/03/06/velesto-bounces-back-after-last-weeks-share-price-collapse/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-d"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Velesto bounces back after last week&#39;s share price collapse</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/03/02/icon-offshores-3200-surge-in-profit-brings-no-joy-to-investors/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-a"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Icon Offshore&#39;s 3,200% surge in profit brings no joy to investors</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/02/28/velesto-tumbles-31-after-rm100mil-net-loss-in-fy2022/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-b"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Velesto tumbles 31% after RM100mil net loss in FY2022</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/business/2023/02/22/oppstar-hopes-to-raise-rm104-mil-for-expansion/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-c"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Oppstar hopes to raise RM104mil for expansion</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/nation/2023/03/16/free-rides-on-putrajaya-mrt-till-march-31/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-d"></div>
+        <div class="article-category">NATION</div>
+        <div class="article-headline">Free rides on Putrajaya MRT till March 31</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/nation/2023/03/16/loke-says-cabinet-committee-on-tackling-traffic-jams-to-be-set-up/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-a"></div>
+        <div class="article-category">NATION</div>
+        <div class="article-headline">Cabinet committee to tackle traffic jams</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/bahasa/tempatan/2023/04/04/projek-kxp-masih-sukar-dimulakan/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-b"></div>
+        <div class="article-category">BAHASA</div>
+        <div class="article-headline">Projek KXP masih sukar dimulakan</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/bahasa/tempatan/2023/03/16/tambang-mrt-putrajaya-percuma-hingga-hujung-bulan/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-c"></div>
+        <div class="article-category">BAHASA</div>
+        <div class="article-headline">Tambang MRT Putrajaya percuma hingga hujung bulan</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/bahasa/tempatan/2023/03/16/jawatankuasa-kabinet-atasi-kesesakan-lalu-lintas-ditubuh-kata-loke/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-d"></div>
+        <div class="article-category">BAHASA</div>
+        <div class="article-headline">Jawatankuasa Kabinet atasi kesesakan lalu lintas ditubuh, kata Loke</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/04/26/star-media-shines-after-the-edge-tong-snap-up-5-4-stake/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-a"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Star Media shines after The Edge, Tong snap up 5.4% stake</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/04/27/fowlboys-from-start-up-glory-to-business-reality/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-b"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">FowlBoys — from start-up glory to business reality</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/business/2023/04/27/sunway-reit-plans-to-diversify-acquisitions/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-c"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Sunway REIT plans to diversify acquisitions</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/business/2023/04/28/cash-rich-dxn-plans-to-raise-rm121-6-mil-from-its-ipo/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-d"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Cash-rich DXN plans to raise RM121.6mil from IPO</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/04/29/genm-shifts-focus-from-south-to-north/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-a"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">GenM shifts focus from South to North</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/05/02/more-malls-opening-despite-glut/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-b"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">More malls opening despite glut</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/05/05/johor-the-new-centre-for-data-storage/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-c"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Johor – the new centre for data storage</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/business/2023/05/10/petronas-dagangan-seeks-rapid-growth-of-convenience-segment/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-d"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Petronas Dagangan seeks rapid growth of convenience segment</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/business/2023/05/10/alliance-ctos-collaborate-to-help-underserved-group-boost-credit-profile/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-a"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Alliance Bank, CTOS to help underserved group boost credit profile</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/05/11/johor-missing-spillover-of-singapore-property-price-surge-2/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-b"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Johor missing spillover of Singapore property price surge</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/05/16/end-of-the-road-for-lim-kok-thays-hong-kong-cruise-empire/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-c"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">End of the road for Lim Kok Thay&#39;s Hong Kong cruise empire</div>
+
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/05/12/gdp-growth-of-5-6-fails-to-impress/" target="_blank" rel="noopener">
+        <div class="article-thumb thumb-d"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">GDP growth of 5.6% fails to impress business analysts</div>
+
+      </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-links">
+      <a href="#" target="_blank">GitHub</a>
+      <a href="#" target="_blank">LinkedIn</a>
+    </div>
+    <div class="meta">Developed by Krishaant — 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>
