@@ -182,7 +182,10 @@
     display:flex; align-items:center; justify-content:center;
     font-family:'Space Grotesk', sans-serif;
     font-weight:700; font-size:18px; color:#111;
+    padding: 8px;
+    overflow: hidden;
   }
+  .logo-box img{ width:100%; height:100%; object-fit:contain; }
   .timeline-body h3{ font-size:17px; font-weight:700; margin-bottom:2px; }
   .timeline-body .role{ color: var(--accent); font-size:14px; font-weight:500; margin-bottom:6px; }
   .timeline-body .sub{ color: var(--text-dim); font-size:14px; margin-bottom:12px; }
@@ -414,16 +417,18 @@
 
     <div class="timeline">
       <div class="timeline-item">
-        <div class="logo-box">P</div>
+        <div class="logo-box"><img src="assets/logos/pearson.png" alt="Pearson"></div>
         <div class="timeline-body">
           <h3>Pearson Publisher</h3>
           <div class="role">Contract Worker</div>
           <div class="sub">Jan 2026 – May 2026</div>
-          <span class="edit-note">Add a line on what this role involved</span>
+          <p style="color:var(--text-dim); font-size:14px; margin-bottom:12px;">
+            Developed content on machine learning applications in sociology for an upcoming textbook.
+          </p>
         </div>
       </div>
       <div class="timeline-item">
-        <div class="logo-box">V</div>
+        <div class="logo-box"><img src="assets/logos/vse.jpeg" alt="Vancouver School of Economics"></div>
         <div class="timeline-body">
           <h3>Vancouver School of Economics at UBC</h3>
           <div class="role">Research Assistant</div>
@@ -439,7 +444,7 @@
         </div>
       </div>
       <div class="timeline-item">
-        <div class="logo-box">e</div>
+        <div class="logo-box"><img src="assets/logos/entomo.png" alt="Entomo"></div>
         <div class="timeline-body">
           <h3>Entomo</h3>
           <div class="role">Intern Data Analyst</div>
@@ -457,7 +462,7 @@
         </div>
       </div>
       <div class="timeline-item">
-        <div class="logo-box">F</div>
+        <div class="logo-box"><img src="assets/logos/fmt.png" alt="FMT News"></div>
         <div class="timeline-body">
           <h3>FMT News</h3>
           <div class="role">Journalist</div>
@@ -473,7 +478,7 @@
         </div>
       </div>
       <div class="timeline-item">
-        <div class="logo-box">A</div>
+        <div class="logo-box"><img src="assets/logos/affinhwang.jpeg" alt="Affin Hwang Investment Bank"></div>
         <div class="timeline-body">
           <h3>Affin Hwang Investment Bank</h3>
           <div class="role">Intern</div>
