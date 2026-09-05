@@ -202,6 +202,7 @@
   .projects-grid{ display:flex; flex-direction:column; gap:20px; }
   .project-card h3{ font-size:16px; font-weight:700; margin-bottom:8px; }
   .project-card p{ color: var(--text-dim); font-size:14px; margin-bottom:14px; }
+  .project-card:hover h3{ color: var(--accent); }
 
   /* ---------- Footer ---------- */
   footer{
@@ -359,9 +360,8 @@
         <h1>Hey, I'm<br><span class="accent">Krishaant.</span></h1>
         <p>
           I'm a Statistics and Economics student at the University of British
-          Columbia, interested in informed decision-making. I like digging into
-          data to understand not just what's happening, but why people decide
-          the things they decide.
+          Columbia. I'm interested in using data to understand how and why
+          people make the decisions they do.
         </p>
       </div>
       <div class="avatar-wrap">
@@ -393,16 +393,17 @@
         <li>Triathlon</li>
         <li>Basketball</li>
         <li>Why your regression probably needs a control group</li>
+        <li>Why "statistically significant" and "actually matters" are different claims</li>
       </ul>
     </div>
 
     <div class="card">
       <h3>A little more about me</h3>
       <ul>
-        <li>Most of my experience has been in end-to-end data workflows — from data collection, cleaning, and transformation to exploratory analysis, visualization, and communicating insights through dashboards and presentations.</li>
-        <li>In my current research position, I develop learning materials on machine learning applications for undergraduate students, with a focus on applied case studies that demonstrate how statistical and computational methods can address real-world problems.</li>
-        <li>I believe every experience is an opportunity to learn and contribute. I approach new environments with curiosity, adaptability, and a willingness to take initiative and make the most of every challenge.</li>
-        <li>I am particularly interested in roles where I can work closer to the decision-making process — not just analyzing data, but translating insights into actionable strategies that create meaningful impact.</li>
+        <li>Most of my experience sits at the intersection of statistics and behavior — building the pipeline from raw data to a defensible answer, then stress-testing whether that answer explains why people acted the way they did, not just what they did.</li>
+        <li>In my current research position, I build case studies on applied machine learning for undergraduates, which mostly comes down to the same question in a different costume: does this model's output actually mean something, or does it just look right?</li>
+        <li>Journalism and research both punish confident answers that don't hold up. I'd rather find out fast that I'm wrong than get attached to a hypothesis — so I look for the fastest, cheapest way to test an idea before I trust it.</li>
+        <li>I'm most interested in roles where the analysis has to survive contact with a decision — where "directionally correct" isn't good enough because someone is about to act on it.</li>
       </ul>
     </div>
   </div>
@@ -451,13 +452,12 @@
           <div class="sub">Jul 2024 – Aug 2024 · Kuala Lumpur, Malaysia</div>
           <p style="color:var(--text-dim); font-size:14px; margin-bottom:12px;">
             My crash-course into data analytics — cleaned data and ran analysis in Excel and Python, built
-            visualizations in Tableau, and created simple APIs to link Jira databases and convert medical
-            records between XML and FHIR formats.
+            visualizations in Power BI, and created simple APIs to link Jira databases.
           </p>
           <div class="tags">
             <span class="tag">Python</span>
             <span class="tag">Excel</span>
-            <span class="tag">Tableau</span>
+            <span class="tag">Power BI</span>
           </div>
         </div>
       </div>
@@ -500,15 +500,42 @@
     </div>
 
     <div class="projects-grid">
-      <div class="card project-card">
-        <span class="edit-note">Example — replace with your project</span>
-        <h3>Project Name</h3>
-        <p>One or two sentences on what it does and why you built it.</p>
+      <a class="card project-card" href="https://github.com/krishaant/ECON326_FinalProject" target="_blank" rel="noopener">
+        <h3>Air Quality &amp; Income Inequality: Canadian Metropolitan Areas</h3>
+        <p>Tested whether income predicts air-quality exposure across Canadian cities — used spline interpolation to model pollution trends over time, then panel regression to link them to income data. Presented at LSE's Knowledge Beyond Boundaries conference (Jun 2025).</p>
         <div class="tags">
-          <span class="tag">Tool</span>
-          <span class="tag">Tool</span>
+          <span class="tag">R</span>
+          <span class="tag">Panel Regression</span>
+          <span class="tag">Environmental Econ</span>
         </div>
-      </div>
+      </a>
+      <a class="card project-card" href="https://github.com/krishaant/ECON323" target="_blank" rel="noopener">
+        <h3>Does Student Sentiment Move Professor Pay?</h3>
+        <p>Scraped 10,000+ RateMyProfessors reviews, scored sentiment with a fine-tuned BERT model, and joined the result against UBC's public salary disclosures (FY21–FY24) to test whether professor pay tracks student sentiment over time.</p>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">NLP</span>
+          <span class="tag">Panel Regression</span>
+        </div>
+      </a>
+      <a class="card project-card" href="https://github.com/krishaant/ECON398" target="_blank" rel="noopener">
+        <h3>Does the Income Gap Vary by Immigrant Generation?</h3>
+        <p>Ran a sequence of regressions of income on first- vs. second-generation immigrant status using the 2021 Canadian Census PUMF, layering in controls (gender, age, education, labour force status, province) and an interaction model to test whether the gap itself depends on education and labour force participation.</p>
+        <div class="tags">
+          <span class="tag">R</span>
+          <span class="tag">Causal Inference</span>
+          <span class="tag">Census Data</span>
+        </div>
+      </a>
+      <a class="card project-card" href="https://github.com/krishaant/stat301" target="_blank" rel="noopener">
+        <h3>Customer Personality Analysis</h3>
+        <p>Cleaned and segmented a retail customer dataset (spending habits, demographics, campaign response) to explore which customer segments actually respond to marketing campaigns.</p>
+        <div class="tags">
+          <span class="tag">R</span>
+          <span class="tag">Clustering</span>
+          <span class="tag">Marketing Analytics</span>
+        </div>
+      </a>
     </div>
   </div>
 </section>
