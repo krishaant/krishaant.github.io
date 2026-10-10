@@ -177,13 +177,7 @@
   .logo-box{
     flex-shrink:0;
     width: 56px; height:56px;
-    border-radius: 14px;
-    background: #fff;
     display:flex; align-items:center; justify-content:center;
-    font-family:'Space Grotesk', sans-serif;
-    font-weight:700; font-size:18px; color:#111;
-    padding: 8px;
-    overflow: hidden;
   }
   .logo-box img{ width:100%; height:100%; object-fit:contain; }
   .timeline-body h3{ font-size:17px; font-weight:700; margin-bottom:2px; }
@@ -330,6 +324,29 @@
     .article-grid{ grid-template-columns: 1fr; }
   }
 
+  /* ---------- Article carousel (pagination) ---------- */
+  .article-carousel{ overflow:hidden; }
+  .article-track{
+    display:flex;
+    transition: transform 0.6s cubic-bezier(.4,0,.2,1);
+  }
+  .article-track > .article-grid{
+    flex: 0 0 100%;
+    min-width: 0;
+  }
+  .carousel-dots{
+    display:flex; justify-content:center; gap:8px;
+    margin-top: 24px;
+  }
+  .carousel-dot{
+    width:7px; height:7px; border-radius:50%;
+    border:none; padding:0; cursor:pointer;
+    background: var(--border);
+    transition: background .2s, transform .2s;
+  }
+  .carousel-dot:hover{ background: var(--text-faint); }
+  .carousel-dot.active{ background: var(--accent); transform: scale(1.3); }
+
   @media (max-width: 620px){
     .byline-list{ columns: 1; }
     .hero-grid{ flex-direction: column-reverse; align-items:flex-start; }
@@ -393,7 +410,6 @@
         <li>Triathlon</li>
         <li>Basketball</li>
         <li>Why your regression probably needs a control group</li>
-        <li>Why "statistically significant" and "actually matters" are different claims</li>
       </ul>
     </div>
 
@@ -430,7 +446,7 @@
         </div>
       </div>
       <div class="timeline-item">
-        <div class="logo-box"><img src="assets/logos/vse.jpeg" alt="Vancouver School of Economics"></div>
+        <div class="logo-box"><img src="assets/logos/vse.png" alt="Vancouver School of Economics"></div>
         <div class="timeline-body">
           <h3>Vancouver School of Economics at UBC</h3>
           <div class="role">Research Assistant</div>
@@ -484,7 +500,7 @@
         </div>
       </div>
       <div class="timeline-item">
-        <div class="logo-box"><img src="assets/logos/affinhwang.jpeg" alt="Affin Hwang Investment Bank"></div>
+        <div class="logo-box"><img src="assets/logos/affinhwang.png" alt="Affin Hwang Investment Bank"></div>
         <div class="timeline-body">
           <h3>Affin Hwang Investment Bank</h3>
           <div class="role">Intern</div>
@@ -578,8 +594,9 @@
     <div class="card byline-card">
       <h3>Published articles</h3>
       <div class="byline-sub">56 pieces on Malaysian business, markets, and national affairs for FMT</div>
-      <div class="article-grid">
-      <a class="article-card" href="https://www.freemalaysiatoday.com/category/bahasa/tempatan/2023/07/31/kemenangan-pn-mampu-jadi-penghalang-ekonomi-kata-pakar" target="_blank" rel="noopener">
+      <div class="article-carousel">
+    <div class="article-track" id="articleTrack">
+      <div class="article-grid">      <a class="article-card" href="https://www.freemalaysiatoday.com/category/bahasa/tempatan/2023/07/31/kemenangan-pn-mampu-jadi-penghalang-ekonomi-kata-pakar" target="_blank" rel="noopener">
         <div class="article-thumb"><img src="https://media.freemalaysiatoday.com/wp-content/uploads/2023/03/b7e4c9a9-pn-ph-bernama-25323.jpg" alt="" loading="lazy"></div>
         <div class="article-category">BAHASA</div>
         <div class="article-headline">Kemenangan PN mampu jadi penghalang ekonomi, kata pakar</div>
@@ -603,6 +620,8 @@
         <div class="article-headline">Baby food market sees boom despite falling birth rate</div>
         <div class="article-date">Jul 24, 2023</div>
       </a>
+      </div>
+      <div class="article-grid">
       <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/06/29/ringgit-impacted-by-exporters-not-repatriating-earnings-says-rafizi" target="_blank" rel="noopener">
         <div class="article-thumb"><img src="https://media.freemalaysiatoday.com/wp-content/uploads/2023/05/2375e484-4_rafizi_ramli_fmt_moganraj_20052023.jpg" alt="" loading="lazy"></div>
         <div class="article-category">BUSINESS</div>
@@ -627,6 +646,8 @@
         <div class="article-headline">Palm oil producers see red despite record output</div>
         <div class="article-date">Jun 25, 2023</div>
       </a>
+      </div>
+      <div class="article-grid">
       <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/06/24/carsome-will-we-fail-to-grab-the-chance-again" target="_blank" rel="noopener">
         <div class="article-thumb"><img src="https://media.freemalaysiatoday.com/wp-content/uploads/2023/06/6b8a2df8-carsome-2jpg.jpg" alt="" loading="lazy"></div>
         <div class="article-category">BUSINESS</div>
@@ -651,6 +672,8 @@
         <div class="article-headline">No recession in 2023, says SERC</div>
 
       </a>
+      </div>
+      <div class="article-grid">
       <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/04/13/lee-kim-yews-company-doing-fine-without-him/" target="_blank" rel="noopener">
         <div class="article-thumb"><img src="https://media.freemalaysiatoday.com/wp-content/uploads/2023/04/077df393-02-lee-kim-yew.jpg" alt="" loading="lazy"></div>
         <div class="article-category">BUSINESS</div>
@@ -675,6 +698,8 @@
         <div class="article-headline">Malaysia&#39;s border reopening boosts consumer, REIT, and construction sectors</div>
 
       </a>
+      </div>
+      <div class="article-grid">
       <a class="article-card" href="https://www.freemalaysiatoday.com/category/business/2023/04/06/consumer-spending-to-remain-resilient-says-kenanga/" target="_blank" rel="noopener">
         <div class="article-thumb"><img src="https://media.freemalaysiatoday.com/wp-content/uploads/2023/03/f440b9ac-giant-shopping-fmt-supermarket-pasaraya-170320-8-1-1.jpg" alt="" loading="lazy"></div>
         <div class="article-category">BUSINESS</div>
@@ -699,6 +724,8 @@
         <div class="article-headline">Airport project that&#39;s still struggling to take off</div>
 
       </a>
+      </div>
+      <div class="article-grid">
       <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/03/31/glimmer-of-hope-for-sapura-energy-to-resolve-its-debt-crisis/" target="_blank" rel="noopener">
         <div class="article-thumb"><img src="https://media.freemalaysiatoday.com/wp-content/uploads/2022/12/sapura-oil-rig-sapura-pic.jpg" alt="" loading="lazy"></div>
         <div class="article-category">BUSINESS</div>
@@ -723,6 +750,8 @@
         <div class="article-headline">Gamuda records 10% rise in quarterly profit to RM195mil</div>
 
       </a>
+      </div>
+      <div class="article-grid">
       <a class="article-card" href="https://www.freemalaysiatoday.com/category/business/2023/03/23/computer-forms-plummets-66-after-acquiring-stake-in-bsl-corp/" target="_blank" rel="noopener">
         <div class="article-thumb"><img src="https://media.freemalaysiatoday.com/wp-content/uploads/2023/02/048b5c5a-cfm-logo-210223-1.jpg" alt="" loading="lazy"></div>
         <div class="article-category">BUSINESS</div>
@@ -747,6 +776,8 @@
         <div class="article-headline">No more turbulence for Tony Fernando&#39; Capital A, AirAsia X</div>
 
       </a>
+      </div>
+      <div class="article-grid">
       <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/03/17/experts-decry-lack-of-effort-to-fight-cybercrimes/" target="_blank" rel="noopener">
         <div class="article-thumb"><img src="https://media.freemalaysiatoday.com/wp-content/uploads/2022/09/03-HACKER-AND-SCAMMER.jpg" alt="" loading="lazy"></div>
         <div class="article-category">BUSINESS</div>
@@ -771,6 +802,8 @@
         <div class="article-headline">Astro dismisses privatisation speculation amid stock rally</div>
 
       </a>
+      </div>
+      <div class="article-grid">
       <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/03/09/sapura-energy-gets-a-breather-in-fight-to-overcome-debt-problem/" target="_blank" rel="noopener">
         <div class="article-thumb"><img src="https://media.freemalaysiatoday.com/wp-content/uploads/2022/12/Sapura-Energy-Pic.jpg" alt="" loading="lazy"></div>
         <div class="article-category">BUSINESS</div>
@@ -795,6 +828,8 @@
         <div class="article-headline">Velesto bounces back after last week&#39;s share price collapse</div>
 
       </a>
+      </div>
+      <div class="article-grid">
       <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/03/02/icon-offshores-3200-surge-in-profit-brings-no-joy-to-investors/" target="_blank" rel="noopener">
         <div class="article-thumb"><img src="https://media.freemalaysiatoday.com/wp-content/uploads/2023/03/5213ad24-icon-offshore_2.3.jpg" alt="" loading="lazy"></div>
         <div class="article-category">BUSINESS</div>
@@ -819,6 +854,8 @@
         <div class="article-headline">Free rides on Putrajaya MRT till March 31</div>
 
       </a>
+      </div>
+      <div class="article-grid">
       <a class="article-card" href="https://www.freemalaysiatoday.com/category/nation/2023/03/16/loke-says-cabinet-committee-on-tackling-traffic-jams-to-be-set-up/" target="_blank" rel="noopener">
         <div class="article-thumb"><img src="https://media.freemalaysiatoday.com/wp-content/uploads/2023/03/90c3410a-traffic-jam-in-kl-fb.jpg" alt="" loading="lazy"></div>
         <div class="article-category">NATION</div>
@@ -843,6 +880,8 @@
         <div class="article-headline">Jawatankuasa Kabinet atasi kesesakan lalu lintas ditubuh, kata Loke</div>
 
       </a>
+      </div>
+      <div class="article-grid">
       <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/04/26/star-media-shines-after-the-edge-tong-snap-up-5-4-stake/" target="_blank" rel="noopener">
         <div class="article-thumb"><img src="https://media.freemalaysiatoday.com/wp-content/uploads/2019/02/Tong-kooi-ong-fmt.jpg" alt="" loading="lazy"></div>
         <div class="article-category">BUSINESS</div>
@@ -867,6 +906,8 @@
         <div class="article-headline">Cash-rich DXN plans to raise RM121.6mil from IPO</div>
 
       </a>
+      </div>
+      <div class="article-grid">
       <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/04/29/genm-shifts-focus-from-south-to-north/" target="_blank" rel="noopener">
         <div class="article-thumb"><img src="https://media.freemalaysiatoday.com/wp-content/uploads/2023/04/746468f7-genting-malaysia-logo.jpg" alt="" loading="lazy"></div>
         <div class="article-category">BUSINESS</div>
@@ -891,6 +932,8 @@
         <div class="article-headline">Petronas Dagangan seeks rapid growth of convenience segment</div>
 
       </a>
+      </div>
+      <div class="article-grid">
       <a class="article-card" href="https://www.freemalaysiatoday.com/category/business/2023/05/10/alliance-ctos-collaborate-to-help-underserved-group-boost-credit-profile/" target="_blank" rel="noopener">
         <div class="article-thumb"><img src="https://media.freemalaysiatoday.com/wp-content/uploads/2023/05/4da0e131-eric-chin_erick-hamburger_kellee-kam-email.jpg" alt="" loading="lazy"></div>
         <div class="article-category">BUSINESS</div>
@@ -917,6 +960,9 @@
       </a>
       </div>
     </div>
+    <div class="carousel-dots" id="carouselDots"></div>
+  </div>
+    </div>
   </div>
 </section>
 
@@ -924,12 +970,54 @@
 <footer>
   <div class="wrap">
     <div class="footer-links">
-      <a href="#" target="_blank">GitHub</a>
-      <a href="#" target="_blank">LinkedIn</a>
+      <a href="https://github.com/krishaant" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://linkedin.com/in/krishaant/" target="_blank" rel="noopener">LinkedIn</a>
     </div>
     <div class="meta">Developed by Krishaant — 2026</div>
   </div>
 </footer>
 
+<script>
+(function(){
+  var carousel = document.querySelector('.article-carousel');
+  var track = document.getElementById('articleTrack');
+  var dotsWrap = document.getElementById('carouselDots');
+  if(!carousel || !track || !dotsWrap) return;
+
+  var pages = track.children;
+  var total = pages.length;
+  var current = 0;
+  var timer;
+
+  for(var i = 0; i < total; i++){
+    var dot = document.createElement('button');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Go to articles page ' + (i + 1));
+    dot.addEventListener('click', (function(idx){
+      return function(){ goTo(idx); resetTimer(); };
+    })(i));
+    dotsWrap.appendChild(dot);
+  }
+  var dots = dotsWrap.children;
+
+  function goTo(i){
+    current = (i + total) % total;
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    for(var j = 0; j < dots.length; j++){
+      dots[j].classList.toggle('active', j === current);
+    }
+  }
+
+  function resetTimer(){
+    clearInterval(timer);
+    timer = setInterval(function(){ goTo(current + 1); }, 5000);
+  }
+
+  carousel.addEventListener('mouseenter', function(){ clearInterval(timer); });
+  carousel.addEventListener('mouseleave', resetTimer);
+
+  resetTimer();
+})();
+</script>
 </body>
 </html>
