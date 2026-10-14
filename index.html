@@ -325,6 +325,29 @@
     .article-grid{ grid-template-columns: 1fr; }
   }
 
+  /* ---------- Article carousel (pagination) ---------- */
+  .article-carousel{ overflow:hidden; }
+  .article-track{
+    display:flex;
+    transition: transform 0.6s cubic-bezier(.4,0,.2,1);
+  }
+  .article-track > .article-grid{
+    flex: 0 0 100%;
+    min-width: 0;
+  }
+  .carousel-dots{
+    display:flex; justify-content:center; gap:8px;
+    margin-top: 24px;
+  }
+  .carousel-dot{
+    width:7px; height:7px; border-radius:50%;
+    border:none; padding:0; cursor:pointer;
+    background: var(--border);
+    transition: background .2s, transform .2s;
+  }
+  .carousel-dot:hover{ background: var(--text-faint); }
+  .carousel-dot.active{ background: var(--accent); transform: scale(1.3); }
+
   @media (max-width: 620px){
     .byline-list{ columns: 1; }
     .hero-grid{ flex-direction: column-reverse; align-items:flex-start; }
@@ -573,7 +596,9 @@
 
     <div class="card byline-card">
       <h3>Published articles</h3>
-      <div class="byline-sub">5 of 178 stories on Malaysian business, markets, and national affairs for FMT &mdash; <a href="https://www.freemalaysiatoday.com/category/author/krishaant-pathmanathan" target="_blank" rel="noopener">full archive</a></div>
+      <div class="byline-sub">8 of 178 stories on Malaysian business, markets, and national affairs for FMT &mdash; <a href="https://www.freemalaysiatoday.com/category/author/krishaant-pathmanathan" target="_blank" rel="noopener">full archive</a></div>
+      <div class="article-carousel">
+        <div class="article-track" id="articleTrack">
       <div class="article-grid">
       <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/06/01/genting-inheritance-saga-gets-murkier-with-new-rm1-6bil-lawsuit" target="_blank" rel="noopener">
         <div class="article-thumb"><img src="https://media.freemalaysiatoday.com/wp-content/uploads/2023/05/2c8c0a4f-lim-goh-tong-genting-group-pic-310523.jpg" alt="Genting inheritance saga gets murkier with new RM1.6bil lawsuit" loading="lazy"></div>
@@ -599,14 +624,38 @@
         <div class="article-headline">Carsome &mdash; will we fail to grab the chance again?</div>
         <div class="article-date">Jun 24, 2023</div>
       </a>
+      </div>
+      <div class="article-grid">
       <a class="article-card" href="https://www.freemalaysiatoday.com/category/business/2023/04/13/no-recession-in-2023-says-serc/" target="_blank" rel="noopener">
         <div class="article-thumb"><img src="https://media.freemalaysiatoday.com/wp-content/uploads/2023/03/827428c9-03-kl-skyline.jpg" alt="No recession in 2023, says SERC" loading="lazy"></div>
         <div class="article-category">BUSINESS</div>
         <div class="article-headline">No recession in 2023, says SERC</div>
         <div class="article-date">Apr 13, 2023</div>
       </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/business/2023/06/27/huge-market-awaits-business-that-embrace-esg" target="_blank" rel="noopener">
+        <div class="article-thumb"><img src="https://media.freemalaysiatoday.com/wp-content/uploads/2022/10/proton-x50-factory-paultan-pic.jpg" alt="Huge market awaits businesses that adopt ESG practices" loading="lazy"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Huge market awaits businesses that adopt ESG practices</div>
+        <div class="article-date">Jun 27, 2023</div>
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/06/23/good-start-for-tech-ipos-but-uncertainty-remains" target="_blank" rel="noopener">
+        <div class="article-thumb"><img src="https://media.freemalaysiatoday.com/wp-content/uploads/2023/05/edaf813b-bursa-malaysia-stock-market-rhb-bank-4.jpg" alt="Good start for tech IPOs, but uncertainty remains" loading="lazy"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">Good start for tech IPOs, but uncertainty remains</div>
+        <div class="article-date">Jun 22, 2023</div>
+      </a>
+      <a class="article-card" href="https://www.freemalaysiatoday.com/category/highlight/2023/03/25/reits-a-safe-haven-in-market-turmoil-says-midf" target="_blank" rel="noopener">
+        <div class="article-thumb"><img src="https://media.freemalaysiatoday.com/wp-content/uploads/2023/03/3096a2a2-pavillion-fbpic-240323.jpg" alt="REITs a safe haven in market turmoil, says MIDF" loading="lazy"></div>
+        <div class="article-category">BUSINESS</div>
+        <div class="article-headline">REITs a safe haven in market turmoil, says MIDF</div>
+        <div class="article-date">Mar 25, 2023</div>
+      </a>
+      </div>
+        </div>
+        <div class="carousel-dots" id="carouselDots"></div>
       </div>
     </div>
+  </div>
   </div>
 </section>
 
@@ -623,5 +672,47 @@
   </div>
 </footer>
 
+<script>
+(function(){
+  var carousel = document.querySelector('.article-carousel');
+  var track = document.getElementById('articleTrack');
+  var dotsWrap = document.getElementById('carouselDots');
+  if(!carousel || !track || !dotsWrap) return;
+
+  var pages = track.children;
+  var total = pages.length;
+  var current = 0;
+  var timer;
+
+  for(var i = 0; i < total; i++){
+    var dot = document.createElement('button');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Go to articles page ' + (i + 1));
+    dot.addEventListener('click', (function(idx){
+      return function(){ goTo(idx); resetTimer(); };
+    })(i));
+    dotsWrap.appendChild(dot);
+  }
+  var dots = dotsWrap.children;
+
+  function goTo(i){
+    current = (i + total) % total;
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    for(var j = 0; j < dots.length; j++){
+      dots[j].classList.toggle('active', j === current);
+    }
+  }
+
+  function resetTimer(){
+    clearInterval(timer);
+    timer = setInterval(function(){ goTo(current + 1); }, 5000);
+  }
+
+  carousel.addEventListener('mouseenter', function(){ clearInterval(timer); });
+  carousel.addEventListener('mouseleave', resetTimer);
+
+  resetTimer();
+})();
+</script>
 </body>
 </html>
