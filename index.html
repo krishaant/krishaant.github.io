@@ -195,6 +195,14 @@
 
   /* ---------- Projects ---------- */
   .projects-grid{ display:flex; flex-direction:column; gap:20px; }
+  .project-thumb{
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    border: 1px solid var(--border);
+    background: #fff;
+  }
+  .project-thumb img{ width:100%; display:block; }
   .project-card h3{ font-size:16px; font-weight:700; margin-bottom:8px; }
   .project-card p{ color: var(--text-dim); font-size:14px; margin-bottom:14px; }
   .project-card:hover h3{ color: var(--accent); }
@@ -525,7 +533,18 @@
     </div>
 
     <div class="projects-grid">
+      <a class="card project-card" href="https://ubc-course-insights-b2kmojhhgmmv4daxqquqvr.streamlit.app/" target="_blank" rel="noopener">
+        <div class="project-thumb"><img src="assets/projects/ubc-course-insights.png" alt="UBC Course Insights dashboard homepage, showing search by course or professor" loading="lazy"></div>
+        <h3>UBC Course Insights</h3>
+        <p>A live tool for UBC students: search any course or professor to see who teaches it, their RateMyProfessors rating, how the class's grades compare to the department average, and their public salary. Built a four-source pipeline (RateMyProfessors, UBC grade data, the course schedule API, and SOFI salary disclosures) into a single DuckDB file that the app reads from.</p>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">Streamlit</span>
+          <span class="tag">DuckDB</span>
+        </div>
+      </a>
       <a class="card project-card" href="https://github.com/krishaant/ECON326_FinalProject" target="_blank" rel="noopener">
+        <div class="project-thumb"><img src="assets/projects/econ326-aqhi-gini.png" alt="Scatterplot of average AQHI against Gini coefficient across 63 Canadian metro areas, with fitted regression line" loading="lazy"></div>
         <h3>Air Quality &amp; Income Inequality: Canadian Metropolitan Areas</h3>
         <p>Found that worse air quality is linked to higher income inequality across 63 Canadian metro areas (adjusted R² = 0.78), using spline interpolation on air-quality data and OLS regressions in R, validated with RESET, VIF, and White's tests. With 3 co-authors (Zane Williams, Aiden Cathcart, and Jiaqi Lei); presented at LSE's Knowledge Beyond Boundaries conference (Jun 2025).</p>
         <div class="tags">
