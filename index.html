@@ -179,12 +179,32 @@
     width: 56px; height:56px;
     display:flex; align-items:center; justify-content:center;
   }
-  .logo-box img{ width:100%; height:100%; object-fit:contain; }
+  .logo-box img{ width:100%; height:100%; object-fit:contain; cursor: pointer; transition: transform .15s; }
+  .logo-box img:hover{ transform: scale(1.08); }
   .logo-box.has-bg{
     background: #fff;
     border-radius: 12px;
     padding: 6px;
     overflow: hidden;
+  }
+
+  /* ---------- Logo lightbox ---------- */
+  .logo-lightbox{
+    position: fixed; inset: 0; z-index: 100;
+    background: rgba(10,10,11,0.85);
+    display: none;
+    align-items: center; justify-content: center;
+    padding: 40px;
+    cursor: zoom-out;
+  }
+  .logo-lightbox.open{ display: flex; }
+  .logo-lightbox img{
+    max-width: min(360px, 80vw);
+    max-height: 80vh;
+    border-radius: 16px;
+    background: #fff;
+    padding: 24px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
   }
   .timeline-body p a{ color: var(--accent); text-decoration: underline; }
   .timeline-body h3{ font-size:17px; font-weight:700; margin-bottom:2px; }
@@ -985,6 +1005,35 @@
     <div class="meta">Developed by Krishaant — 2026</div>
   </div>
 </footer>
+
+<div class="logo-lightbox" id="logoLightbox">
+  <img id="logoLightboxImg" src="" alt="">
+</div>
+
+<script>
+(function(){
+  var lightbox = document.getElementById('logoLightbox');
+  var lightboxImg = document.getElementById('logoLightboxImg');
+  if(!lightbox || !lightboxImg) return;
+
+  function openLightbox(img){
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+    lightbox.classList.add('open');
+  }
+  function closeLightbox(){
+    lightbox.classList.remove('open');
+  }
+
+  document.querySelectorAll('.logo-box img').forEach(function(img){
+    img.addEventListener('click', function(){ openLightbox(img); });
+  });
+  lightbox.addEventListener('click', closeLightbox);
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closeLightbox();
+  });
+})();
+</script>
 
 <script>
 (function(){
